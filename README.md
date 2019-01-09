@@ -3,7 +3,10 @@
 ## 安装
 npm的安装方式
 
+```
     npm install chuck-wechat
+```
+
 
 ## 微信扫码登录
 
@@ -41,7 +44,6 @@ npm的安装方式
         "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
 
     }
-
 ## 扫码支付
 > 具体传入的参数参考：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1 其中nonce_str和trade_type这两个参数，我已经在包里加了，所以可以不传这两个参数。
 
