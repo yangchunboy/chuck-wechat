@@ -4,7 +4,7 @@
 npm的安装方式
 
 ```
-    npm install chuck-wechat
+npm install chuck-wechat
 ```
 
 

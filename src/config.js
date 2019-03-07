@@ -15,3 +15,6 @@ export const userInfoUrl = 'https://api.weixin.qq.com/sns/userinfo?';
 
 // 获取小程序授权接口
 export const miniUserUrl = 'https://api.weixin.qq.com/sns/jscode2session?';
+
+// 微信退款的域名
+export const refundUrl = 'https://api.mch.weixin.qq.com/secapi/pay/refund';

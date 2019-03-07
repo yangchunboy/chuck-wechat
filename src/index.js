@@ -1,7 +1,7 @@
 
 import { parseString } from 'xml2js';
 import { generateSign, generateRandomStr, generateXml, generateParams } from './utility';
-import { unifiedorderUrl, getAccessTokenUrl, userInfoUrl, miniUserUrl } from './config';
+import { unifiedorderUrl, getAccessTokenUrl, userInfoUrl, miniUserUrl, refundUrl } from './config';
 import request from 'request-promise-native';
 
 class Wechat {
@@ -106,7 +106,35 @@ class Wechat {
 		});
 		return wechatObj;
 	}
-
+	// 退款
+	async refund(params, certUrl) {
+		const appid = this.appid;
+		const mch_id = this.mch_id;
+		const obj = {
+			nonce_str: generateRandomStr(),
+			appid,
+			mch_id: this.mch_id,			
+		};
+		const data = params;
+		Object.assign(data, obj);
+		const sign = generateSign({ data, partnerKey: this.partnerKey });
+		Object.assign(data, { sign });
+		const xml = generateXml(data);
+		console.log(data);
+		const result = await request({
+			method: 'post',
+			uri: refundUrl,
+			body: xml,
+			agentOptions: {
+				// formal
+				pfx: require('fs').readFileSync(certUrl),
+				// test
+				passphrase: mch_id,
+			},
+		});
+		console.log(result)
+		return result;
+	}
 }
 
 export default Wechat;
