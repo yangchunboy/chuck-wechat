@@ -71,6 +71,32 @@ const promise = wechat.codePay(data);
 promise.then((result) => { console.log(result) });
 ```
 
+## 微信退款
+
+> 微信退款需要多传一个退款证书的路径，不同支付的参数不一定一致，请根据不同支付传不同的参数，以下例子举的是公众号退款[请求参数参考链接](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4)
+
+```
+import Wechat from 'chuck-wechat';
+
+const params = {
+    appid: 'wx1111111111',
+    mch_id: '1111111111',
+    partnerKey: 'xxxxxxxxx',
+    appSecret: 'xxxxxxxx',
+};
+const wechat = new Wechat(params);
+const data = {
+    out_trade_no: 'DD2018051401',
+    out_refund_no: 'TK0000001',
+    total_fee: 1,
+    refund_fee: 1,        
+}
+const certUrl = '/etc/cert/refund_cert.p12'
+const promise = wechat.refund(data, certUrl);
+promise.then((result) => { console.log(result) });
+
+```
+
 ## 小程序登录
 
 > [请求参数参考链接](https://developers.weixin.qq.com/miniprogram/dev/api/code2Session.html)
