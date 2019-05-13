@@ -1,6 +1,6 @@
 {
   "name": "chuck-wechat",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "wechat ",
   "main": "index.js",
   "directories": {
@@ -31,7 +31,8 @@
     "wechat",
     "微信支付",
     "小程序授权",
-    "扫码支付"
+    "扫码支付",
+    "微信退款"
   ],
   "author": "chuck",
   "license": "ISC",

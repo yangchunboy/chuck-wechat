@@ -132,8 +132,11 @@ class Wechat {
 				passphrase: mch_id,
 			},
 		});
-		console.log(result)
-		return result;
+		let wechatObj = null;
+		parseString(result.toString(), (err, xml) => {
+			wechatObj = xml.xml;
+		});
+		return wechatObj;
 	}
 }
 
