@@ -1,7 +1,7 @@
 
 import { parseString } from 'xml2js';
 import { generateSign, generateRandomStr, generateXml, generateParams } from './utility';
-import { unifiedorderUrl, getAccessTokenUrl, userInfoUrl, miniUserUrl, refundUrl } from './config';
+import { unifiedorderUrl, getAccessTokenUrl, userInfoUrl, miniUserUrl, refundUrl, businessToUserUrl } from './config';
 import request from 'request-promise-native';
 
 class Wechat {
@@ -120,7 +120,7 @@ class Wechat {
 		const sign = generateSign({ data, partnerKey: this.partnerKey });
 		Object.assign(data, { sign });
 		const xml = generateXml(data);
-		console.log(data);
+		// console.log(data);
 		const result = await request({
 			method: 'post',
 			uri: refundUrl,
@@ -138,6 +138,42 @@ class Wechat {
 		});
 		return wechatObj;
 	}
+
+	// 企业付款到零钱
+	async transfer(params, certUrl) {
+		const { appid, mch_id } = this;
+		const obj = {
+			nonce_str: generateRandomStr(),
+			mch_appid: appid,
+			mchid: mch_id,			
+		};
+		const data = params;
+		Object.assign(data, obj);
+		const sign = generateSign({ data, partnerKey: this.partnerKey });
+		Object.assign(data, { sign });
+		const xml = generateXml(data);
+		const result = await request({
+			method: 'post',
+			uri: businessToUserUrl,
+			body: xml,
+			agentOptions: {
+				// formal
+				pfx: require('fs').readFileSync(certUrl),
+				// test
+				passphrase: mch_id,
+			},
+		});
+		try{
+			let wechatObj = null;
+			parseString(result.toString(), (err, xml) => {
+				wechatObj = xml.xml;
+			});
+			return wechatObj;
+		} catch(error) {
+			return error;
+		}
+	}
+
 }
 
 export default Wechat;

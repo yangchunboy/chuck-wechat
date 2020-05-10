@@ -154,3 +154,31 @@ promise.then((result) => { console.log(result) });
         prepay_id: [ 'wx111111111111111111111111111111' ],
     }
 ```
+
+## 企业付款到用户零钱
+
+调用付款给用户的参数和证书的获取方式见下面链接：
+
+> [请求参数参考链接](https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2)
+
+```javascript
+    import Wechat from 'chuck-wechat';
+
+    const params = {
+        mch_appid: 'wx1111111111',
+        mchid: '1111111111',
+        partnerKey: 'xxxxxxxxx',
+        appSecret: 'xxxxxxxx',
+    };
+    const wechat = new Wechat(params);
+    const data = {
+        partner_trade_no: 'DD2018051401',
+        openid: 'xxxxx',
+        check_name: "FORCE_CHECK",
+        amount: 1,
+        desc: '付款备注'    
+    }
+    const certUrl = '/etc/cert/cert.p12'
+    const promise = wechat.transfer(data, certUrl);
+    promise.then((result) => { console.log(result) });
+```

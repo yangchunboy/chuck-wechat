@@ -18,3 +18,6 @@ export const miniUserUrl = 'https://api.weixin.qq.com/sns/jscode2session?';
 
 // 微信退款的域名
 export const refundUrl = 'https://api.mch.weixin.qq.com/secapi/pay/refund';
+
+// 微信企业付款到零钱的请求路径
+export const businessToUserUrl = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
