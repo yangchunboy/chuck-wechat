@@ -14,7 +14,7 @@ npm install chuck-wechat
 > 首先在微信开放平台配置好授权回调域名，用户扫码成功后就会跳回这个授权域名并在域名后面带上code参数，拿到这个code参数，然后调用codeLogin方法，这个方法有两个参数，第一个参数就是code，第二个参数默认是false，如果想拿到微信用户的个人信息，例如：微信昵称，微信头像等就将这个参数传true
 
 
-    iconst { default: Wechat } = require('chuck-wechat');
+    const { default: Wechat } = require('chuck-wechat');
 
     const params = {
         appid: 'wx1111111111',
@@ -47,7 +47,7 @@ npm install chuck-wechat
 ## 扫码支付
 > 具体传入的参数参考：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1 其中nonce_str和trade_type这两个参数，我已经在包里加了，所以可以不传这两个参数。
 
-```
+```javascript
 const { default: Wechat } = require('chuck-wechat');
 
 const params = {
@@ -75,7 +75,7 @@ promise.then((result) => { console.log(result) });
 
 > 微信退款需要多传一个退款证书的路径，不同支付的参数不一定一致，请根据不同支付传不同的参数，以下例子举的是公众号退款[请求参数参考链接](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4)
 
-```
+```javascript
 const { default: Wechat } = require('chuck-wechat');
 
 const params = {
@@ -101,7 +101,7 @@ promise.then((result) => { console.log(result) });
 
 > [请求参数参考链接](https://developers.weixin.qq.com/miniprogram/dev/api/code2Session.html)
 
-```
+```javascript
     const { default: Wechat } = require('chuck-wechat');
 
     const params = {
@@ -118,7 +118,7 @@ promise.then((result) => { console.log(result) });
 
 >[请求参数参考链接](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1)
 
-```
+```javascript
     const { default: Wechat } = require('chuck-wechat');
 
     const params = {
